@@ -11,7 +11,8 @@ import SwiftUI
 struct AppleLoginButtonApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppleLoginView()
+                .environmentObject(AppleButtonViewModel())
         }
     }
 }
