@@ -7,23 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8753F5952C384FA1008392E3 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8753F5942C384FA1008392E3 /* ViewExtension.swift */; };
 		87B20F182C359CC4005B8D89 /* AppleLoginButtonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B20F172C359CC4005B8D89 /* AppleLoginButtonApp.swift */; };
 		87B20F1A2C359CC4005B8D89 /* AppleLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B20F192C359CC4005B8D89 /* AppleLoginView.swift */; };
 		87B20F1C2C359CC5005B8D89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87B20F1B2C359CC5005B8D89 /* Assets.xcassets */; };
 		87B20F1F2C359CC5005B8D89 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87B20F1E2C359CC5005B8D89 /* Preview Assets.xcassets */; };
-		87CB457D2C3939910032F818 /* AppleButtonWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CB457C2C3939910032F818 /* AppleButtonWrappers.swift */; };
 		87CF28252C3887FB001EF3CB /* AppleButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CF28242C3887FB001EF3CB /* AppleButtonViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8753F5942C384FA1008392E3 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		87B20F142C359CC4005B8D89 /* AppleLoginButton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleLoginButton.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87B20F172C359CC4005B8D89 /* AppleLoginButtonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginButtonApp.swift; sourceTree = "<group>"; };
 		87B20F192C359CC4005B8D89 /* AppleLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginView.swift; sourceTree = "<group>"; };
 		87B20F1B2C359CC5005B8D89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		87B20F1E2C359CC5005B8D89 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		87CB457C2C3939910032F818 /* AppleButtonWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleButtonWrappers.swift; sourceTree = "<group>"; };
 		87CF28242C3887FB001EF3CB /* AppleButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleButtonViewModel.swift; sourceTree = "<group>"; };
 		87EDC4A42C35B27E000C2663 /* AppleLoginButton.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppleLoginButton.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,14 +54,12 @@
 		87B20F162C359CC4005B8D89 /* AppleLoginButton */ = {
 			isa = PBXGroup;
 			children = (
-				8753F5942C384FA1008392E3 /* ViewExtension.swift */,
 				87EDC4A42C35B27E000C2663 /* AppleLoginButton.entitlements */,
 				87B20F172C359CC4005B8D89 /* AppleLoginButtonApp.swift */,
 				87B20F192C359CC4005B8D89 /* AppleLoginView.swift */,
 				87CF28242C3887FB001EF3CB /* AppleButtonViewModel.swift */,
 				87B20F1B2C359CC5005B8D89 /* Assets.xcassets */,
 				87B20F1D2C359CC5005B8D89 /* Preview Content */,
-				87CB457C2C3939910032F818 /* AppleButtonWrappers.swift */,
 			);
 			path = AppleLoginButton;
 			sourceTree = "<group>";
@@ -149,10 +143,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				87CF28252C3887FB001EF3CB /* AppleButtonViewModel.swift in Sources */,
-				8753F5952C384FA1008392E3 /* ViewExtension.swift in Sources */,
 				87B20F1A2C359CC4005B8D89 /* AppleLoginView.swift in Sources */,
 				87B20F182C359CC4005B8D89 /* AppleLoginButtonApp.swift in Sources */,
-				87CB457D2C3939910032F818 /* AppleButtonWrappers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

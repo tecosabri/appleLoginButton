@@ -10,18 +10,19 @@ import AuthenticationServices
 
 struct AppleLoginView: View {
     
-    @EnvironmentObject var authenticationViewModel: AppleButtonViewModel
     @State var presentButton: Bool = false
+    @EnvironmentObject var viewModel: AppleButtonViewModel
     
     var body: some View {
+        
         VStack {
             // This view will show the apple login button if the apple button is pressed
             InstructionsView(presentButton: $presentButton)
             
-            // If the button is pressed, the following apple login button will be shown
+            // If the button is pressed, the following apple login button will be shown with some pickers to select the button's UI
             if(presentButton) {
-                ButtonStylePickers(buttonLabel: $authenticationViewModel.selectedLabel, buttonStyle: $authenticationViewModel.selectedStyle)
-                AppleButton(buttonLabel: $authenticationViewModel.selectedLabel, buttonStyle: $authenticationViewModel.selectedStyle)
+                ButtonStylePickers()
+                AppleButton()
             }
         }
         .padding(30)
@@ -31,6 +32,9 @@ struct AppleLoginView: View {
             RoundedRectangle(cornerRadius: 20)
                 .stroke(.black, lineWidth: 2)
         )
+        .alert("Authenticated!", isPresented: $viewModel.showPopUp) {
+            Button("OK", role: .cancel) { }
+        }
     }
 }
 
@@ -40,14 +44,14 @@ struct AppleLoginView: View {
 }
 
 // MARK: - AppleButton
+/// AppleButton is a view that contains the Apple sign in button with the selected label and style of the AppleButtonViewModel.
 struct AppleButton: View {
     
-    @Binding var buttonLabel: SignInWithAppleButtonLabelWrapper
-    @Binding var buttonStyle: SignInWithAppleButtonStyleWrapper
+    @EnvironmentObject var appleButtonViewModel: AppleButtonViewModel
     
     var body: some View {
         // Sign in with Apple
-        SignInWithAppleButton(buttonLabel.label) { request in
+        SignInWithAppleButton(appleButtonViewModel.selectedLabel.label) { request in
             // Here you can customize the request to send to Apple servers
             request.requestedScopes = [.fullName, .email]
             request.nonce = "randomNonce"
@@ -56,43 +60,39 @@ struct AppleButton: View {
                 case .success(let authorization):
                     // The success case provides you with an authorization that contains valuable auth info about the user authentication
                     print("Authorization: \(authorization)")
+                    appleButtonViewModel.showPopUp = true
                 case .failure(let error):
                     // When something goes wrong with the user authentication, this part of the code is executed
                     print("Error: \(error)")
             }
         }
-        .frame(width: 280, height: 45)
-        .signInWithAppleButtonStyle(buttonStyle.style)
-        .id(UUID())
+        .frame(width: 280, height: 45) // Follow the Apple guidelines for the button size
+        .signInWithAppleButtonStyle(appleButtonViewModel.selectedStyle.style)
+        .id("\(appleButtonViewModel.selectedLabel)-\(appleButtonViewModel.selectedStyle)") // The Label and Style are not suitable for UI changes so it is mandatory to force a re-render of the button when the properties change
     }
 }
 
 // MARK: - Button mode
 struct ButtonStylePickers: View {
     
-    @Binding var buttonLabel: SignInWithAppleButtonLabelWrapper
-    @Binding var buttonStyle: SignInWithAppleButtonStyleWrapper
-    
+    @EnvironmentObject var appleButtonViewModel: AppleButtonViewModel
+
     var body: some View {
         VStack(spacing: 20) {
             
-            Picker("Button label", selection: $buttonLabel) {
-                ForEach([SignInWithAppleButtonLabelWrapper.signIn,
-                         SignInWithAppleButtonLabelWrapper.signUp,
-                         SignInWithAppleButtonLabelWrapper.continue],
+            Picker("Button label", selection: $appleButtonViewModel.selectedLabel) {
+                ForEach(appleButtonViewModel.appleButtonLabels,
                         id: \.self) { label in
-                    Text(label.description).tag(label)
+                    Text(label.id).tag(label)
                 }
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal)
 
-            Picker("Button Style", selection: $buttonStyle) {
-                ForEach([SignInWithAppleButtonStyleWrapper.black,
-                         SignInWithAppleButtonStyleWrapper.whiteOutline,
-                         SignInWithAppleButtonStyleWrapper.white],
+            Picker("Button Style", selection: $appleButtonViewModel.selectedStyle) {
+                ForEach(appleButtonViewModel.appleButtonStyles,
                         id: \.self) { style in
-                    Text(style.description).tag(style)
+                    Text(style.id).tag(style)
                 }
             }
             .pickerStyle(SegmentedPickerStyle())
@@ -104,11 +104,8 @@ struct ButtonStylePickers: View {
 }
 
 #Preview("Pickers") {
-    
-    @Previewable @State var buttonLabel: SignInWithAppleButtonLabelWrapper = .signIn
-    @Previewable @State var buttonStyle: SignInWithAppleButtonStyleWrapper = .black
-    
-    ButtonStylePickers(buttonLabel: $buttonLabel, buttonStyle: $buttonStyle)
+    ButtonStylePickers()
+        .environmentObject(AppleButtonViewModel())
 }
 
 
